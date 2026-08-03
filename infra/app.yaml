@@ -42,7 +42,8 @@ services:
         scope: RUN_TIME
         value: ${APP_DOMAIN}
       # The following must be set via DO App Console Secrets:
-      # SECRET_KEY, DARAZ_APP_KEY, DARAZ_APP_SECRET, DARAZ_REDIRECT_URI, SPACES_*
+      # SECRET_KEY, DARAZ_APP_KEY, DARAZ_APP_SECRET, DARAZ_REDIRECT_URI
+      # SPACES_ACCESS_KEY_ID, SPACES_SECRET_ACCESS_KEY, SPACES_BUCKET_NAME, SPACES_ENDPOINT_URL, SPACES_REGION_NAME
     health_check:
       http_path: /healthz/
     http_port: 8080

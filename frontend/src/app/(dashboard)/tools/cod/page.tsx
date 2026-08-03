@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { 
   ArrowLeft, HelpCircle, Wallet, FileX, AlertTriangle, Search, ChevronDown, 
-  Download, FileSpreadsheet, FileText, AlertOctagon, CheckCircle2, ChevronRight
+  Download, FileSpreadsheet, FileText, AlertOctagon, CheckCircle2, ChevronRight, RefreshCw
 } from 'lucide-react';
 
 export default function FinanceAuditPage() {
