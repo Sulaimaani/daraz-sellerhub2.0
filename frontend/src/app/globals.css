@@ -1,26 +1,58 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-brand-primary: #f4711f;
+  --color-brand-primary-light: #fef0e8;
+  --color-brand-primary-dark: #d65a12;
+  --color-bg-app: #f7f8fa;
+  --color-border-card: #e7e9ee;
+
+  --color-navy-light: #1b3557;
+  --color-navy-dark: #12253f;
+
+  --radius-card: 12px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    background-color: var(--color-bg-app);
+    color: #111827;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .card {
+    background-color: white;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border-card);
+  }
+
+  .header-gradient {
+    background: linear-gradient(
+      to right,
+      var(--color-navy-dark),
+      var(--color-navy-light)
+    );
+    color: white;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    color: #4b5563;
+    border-left: 4px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .sidebar-item:hover {
+    background-color: var(--color-brand-primary-light);
+    color: var(--color-brand-primary-dark);
+  }
+
+  .sidebar-item.active {
+    background-color: var(--color-brand-primary-light);
+    color: var(--color-brand-primary-dark);
+    border-left-color: var(--color-brand-primary);
+  }
 }

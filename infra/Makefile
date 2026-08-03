@@ -25,3 +25,11 @@ test:
 	docker compose -f docker-compose.yml exec backend pytest
 
 init: build up migrate
+
+lint:
+	cd backend && ruff check .
+	cd frontend && npm run lint
+
+fmt:
+	cd backend && black . && ruff check --fix .
+	cd frontend && npm run format
