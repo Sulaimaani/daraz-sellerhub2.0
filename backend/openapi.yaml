@@ -146,6 +146,115 @@ paths:
       responses:
         '200':
           description: No response body
+  /api/orders/:
+    get:
+      operationId: orders_list
+      parameters:
+      - name: cursor
+        required: false
+        in: query
+        description: The pagination cursor value.
+        schema:
+          type: string
+      tags:
+      - orders
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedOrderListList'
+          description: ''
+  /api/orders/{id}/:
+    get:
+      operationId: orders_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - orders
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderDetail'
+          description: ''
+  /api/orders/analytics/:
+    get:
+      operationId: orders_analytics_retrieve
+      tags:
+      - orders
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+          description: ''
+  /api/orders/export/:
+    post:
+      operationId: orders_export_create
+      tags:
+      - orders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderList'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OrderList'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OrderList'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+          description: ''
+  /api/orders/needs-attention/:
+    get:
+      operationId: orders_needs_attention_retrieve
+      tags:
+      - orders
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+          description: ''
+  /api/orders/summary/:
+    get:
+      operationId: orders_summary_retrieve
+      tags:
+      - orders
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+          description: ''
   /api/schema/:
     get:
       operationId: schema_retrieve
@@ -602,6 +711,267 @@ paths:
           description: ''
 components:
   schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        phone:
+          type: string
+          maxLength: 255
+        city:
+          type: string
+          maxLength: 255
+        address_line:
+          type: string
+      required:
+      - id
+    FinanceTransaction:
+      type: object
+      properties:
+        transaction_type:
+          type: string
+          maxLength: 100
+        fee_name:
+          type: string
+          maxLength: 255
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        transaction_date:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+      - fee_name
+      - transaction_type
+    OrderDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        order_number:
+          type: string
+          maxLength: 255
+        status:
+          type: string
+          maxLength: 100
+        payment_method:
+          type: string
+          maxLength: 100
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        items_count:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        created_at_daraz:
+          type: string
+          format: date-time
+          nullable: true
+        customer:
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemDetail'
+          readOnly: true
+        masked_phone:
+          type: string
+          readOnly: true
+        shipping_fee:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        voucher:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        tax_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        raw_json: {}
+      required:
+      - customer
+      - id
+      - items
+      - masked_phone
+      - order_number
+      - status
+    OrderItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 500
+        sku_string:
+          type: string
+          maxLength: 255
+        variation:
+          type: string
+          maxLength: 500
+        status:
+          type: string
+          maxLength: 100
+        item_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        profit_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+        profit_confidence:
+          type: string
+          maxLength: 50
+        profit_computed_at:
+          type: string
+          format: date-time
+          nullable: true
+        image_url:
+          type: string
+          readOnly: true
+      required:
+      - id
+      - image_url
+      - name
+      - sku_string
+      - status
+    OrderItemDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 500
+        sku_string:
+          type: string
+          maxLength: 255
+        variation:
+          type: string
+          maxLength: 500
+        status:
+          type: string
+          maxLength: 100
+        item_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        profit_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+        profit_confidence:
+          type: string
+          maxLength: 50
+        profit_computed_at:
+          type: string
+          format: date-time
+          nullable: true
+        image_url:
+          type: string
+          readOnly: true
+        finance_transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FinanceTransaction'
+          readOnly: true
+        sku_cost:
+          type: string
+          readOnly: true
+      required:
+      - finance_transactions
+      - id
+      - image_url
+      - name
+      - sku_cost
+      - sku_string
+      - status
+    OrderList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        order_number:
+          type: string
+          maxLength: 255
+        status:
+          type: string
+          maxLength: 100
+        payment_method:
+          type: string
+          maxLength: 100
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        items_count:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        created_at_daraz:
+          type: string
+          format: date-time
+          nullable: true
+        customer:
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+          readOnly: true
+        masked_phone:
+          type: string
+          readOnly: true
+      required:
+      - customer
+      - id
+      - items
+      - masked_phone
+      - order_number
+      - status
+    PaginatedOrderListList:
+      type: object
+      required:
+      - results
+      properties:
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?cursor=cD00ODY%3D"
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?cursor=cj0xJnA9NDg3
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderList'
     PatchedStoreRename:
       type: object
       properties:

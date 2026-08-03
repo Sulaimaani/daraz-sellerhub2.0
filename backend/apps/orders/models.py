@@ -107,6 +107,11 @@ class OrderItem(models.Model):
     created_at_daraz = models.DateTimeField(null=True, blank=True)
     updated_at_daraz = models.DateTimeField(null=True, blank=True)
     sla_time_stamp = models.DateTimeField(null=True, blank=True)
+    
+    # Profit Caching Fields
+    profit_amount = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    profit_confidence = models.CharField(max_length=50, blank=True) # FINAL, PROVISIONAL, INCOMPLETE
+    profit_computed_at = models.DateTimeField(null=True, blank=True)
 
     raw_json = models.JSONField(default=dict)
     created_at = models.DateTimeField(auto_now_add=True)
