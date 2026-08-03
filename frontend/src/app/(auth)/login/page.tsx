@@ -19,8 +19,7 @@ export default function LoginPage() {
       setAccessToken(response.data.access);
       router.push("/dashboard");
     } catch (err) {
-      const error = err as any;
-      setError(error.response?.data?.detail || "Login failed. Please check your credentials.");
+      setError((err as { response?: { data?: { error?: string } } }).response?.data?.error || "Failed to login");
     }
   };
 

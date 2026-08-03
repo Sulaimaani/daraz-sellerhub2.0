@@ -19,12 +19,17 @@ from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
-from apps.core.health import healthz
+from django.http import HttpResponse
+
+def healthz(request):
+    return HttpResponse("OK")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("healthz/", healthz, name="healthz"),
     path("api/auth/", include("apps.accounts.urls")),
+    path("api/stores/", include("apps.stores.urls")),
+    path("api/onboarding/", include("apps.onboarding.urls")),
     # OpenAPI Schema
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(

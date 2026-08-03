@@ -1,0 +1,766 @@
+openapi: 3.0.3
+info:
+  title: ''
+  version: 0.0.0
+paths:
+  /api/auth/login/:
+    post:
+      operationId: auth_login_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /api/auth/logout/:
+    post:
+      operationId: auth_logout_create
+      tags:
+      - auth
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/auth/me/:
+    get:
+      operationId: auth_me_retrieve
+      tags:
+      - auth
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /api/auth/refresh/:
+    post:
+      operationId: auth_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/auth/register/:
+    post:
+      operationId: auth_register_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Register'
+          description: ''
+  /api/onboarding/:
+    get:
+      operationId: onboarding_retrieve
+      tags:
+      - onboarding
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: onboarding_create
+      tags:
+      - onboarding
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/onboarding/step/:
+    get:
+      operationId: onboarding_step_retrieve
+      tags:
+      - onboarding
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: onboarding_step_create
+      tags:
+      - onboarding
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/schema/:
+    get:
+      operationId: schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - ht
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - ug
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - schema
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/stores/:
+    get:
+      operationId: stores_list
+      tags:
+      - stores
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Store'
+          description: ''
+    post:
+      operationId: stores_create
+      tags:
+      - stores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Store'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Store'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Store'
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
+  /api/stores/{id}/:
+    get:
+      operationId: stores_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - stores
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
+    put:
+      operationId: stores_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - stores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreRename'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StoreRename'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StoreRename'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreRename'
+          description: ''
+    patch:
+      operationId: stores_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - stores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStoreRename'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedStoreRename'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedStoreRename'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreRename'
+          description: ''
+    delete:
+      operationId: stores_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - stores
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/stores/{id}/disconnect/:
+    post:
+      operationId: stores_disconnect_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - stores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Store'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Store'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Store'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
+  /api/stores/{id}/rebuild-history/:
+    post:
+      operationId: stores_rebuild_history_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - stores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Store'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Store'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Store'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
+  /api/stores/{id}/reconnect/:
+    post:
+      operationId: stores_reconnect_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - stores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Store'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Store'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Store'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
+  /api/stores/{id}/sync-status/:
+    get:
+      operationId: stores_sync_status_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - stores
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
+  /api/stores/callback/:
+    get:
+      operationId: stores_callback_retrieve
+      tags:
+      - stores
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
+  /api/stores/connect/:
+    post:
+      operationId: stores_connect_create
+      tags:
+      - stores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Store'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Store'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Store'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
+components:
+  schemas:
+    PatchedStoreRename:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+    Register:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+        business_name:
+          type: string
+          writeOnly: true
+        phone:
+          type: string
+          writeOnly: true
+      required:
+      - email
+      - password
+    StatusEnum:
+      enum:
+      - connected
+      - disconnected
+      - needs_reconnect
+      - error
+      type: string
+      description: |-
+        * `connected` - Connected
+        * `disconnected` - Disconnected
+        * `needs_reconnect` - Needs Reconnect
+        * `error` - Error
+    Store:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        short_code:
+          type: string
+          readOnly: true
+        seller_email:
+          type: string
+          format: email
+          readOnly: true
+        country:
+          type: string
+          readOnly: true
+        currency:
+          type: string
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          readOnly: true
+        connected_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        disconnected_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        last_sync_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        sync_progress_pct:
+          type: string
+          readOnly: true
+        sync_status:
+          type: string
+          readOnly: true
+        sync_counters:
+          type: string
+          readOnly: true
+        has_120_day_history:
+          type: string
+          readOnly: true
+      required:
+      - connected_at
+      - country
+      - currency
+      - disconnected_at
+      - has_120_day_history
+      - id
+      - last_sync_at
+      - name
+      - seller_email
+      - short_code
+      - status
+      - sync_counters
+      - sync_progress_pct
+      - sync_status
+    StoreRename:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+      required:
+      - name
+    TokenObtainPair:
+      type: object
+      properties:
+        email:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - email
+      - password
+      - refresh
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+      required:
+      - access
+      - refresh
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        is_active:
+          type: boolean
+          readOnly: true
+        email_verified:
+          type: boolean
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - email
+      - email_verified
+      - id
+      - is_active
+      - updated_at
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

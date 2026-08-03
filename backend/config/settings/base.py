@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     # Local apps
     "apps.core",
     "apps.accounts",
+    "apps.stores",
+    "apps.onboarding",
 ]
 
 AUTH_USER_MODEL = "accounts.User"
@@ -126,3 +128,9 @@ CELERY_BROKER_URL = env("REDIS_URL", default="redis://localhost:6379/0")
 CELERY_RESULT_BACKEND = env("REDIS_URL", default="redis://localhost:6379/0")
 
 FIELD_ENCRYPTION_KEY = env("FIELD_ENCRYPTION_KEY", default="")
+
+# Daraz API
+DARAZ_APP_KEY = env("DARAZ_APP_KEY", default="")
+DARAZ_APP_SECRET = env("DARAZ_APP_SECRET", default="")
+DARAZ_REDIRECT_URI = env("DARAZ_REDIRECT_URI", default="")
+DARAZ_MOCK = env.bool("DARAZ_MOCK", default=False)

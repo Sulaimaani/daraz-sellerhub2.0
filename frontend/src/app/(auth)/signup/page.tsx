@@ -23,8 +23,7 @@ export default function SignupPage() {
       setSuccess(true);
       setTimeout(() => router.push("/login"), 3000);
     } catch (err) {
-      const error = err as any;
-      setError(error.response?.data?.email?.[0] || "Registration failed.");
+      setError((err as { response?: { data?: { error?: string } } }).response?.data?.error || "Failed to create account");
     }
   };
 

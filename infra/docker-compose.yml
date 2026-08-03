@@ -96,5 +96,13 @@ services:
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:8000/api
 
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --url http://backend:8000
+    profiles:
+      - tunnel
+    depends_on:
+      - backend
+
 volumes:
   postgres_data:
