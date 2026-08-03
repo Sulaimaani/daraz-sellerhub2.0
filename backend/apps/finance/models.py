@@ -69,3 +69,48 @@ class FinanceStatement(models.Model):
 
     def __str__(self):
         return self.statement_number
+
+class FinanceAudit(models.Model):
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='finance_audits')
+    period_start = models.DateTimeField()
+    period_end = models.DateTimeField()
+    
+    run_at = models.DateTimeField(auto_now_add=True)
+    run_by = models.CharField(max_length=255, blank=True)
+    status = models.CharField(max_length=50, default='queued') # queued/running/done/failed
+    
+    orders_examined = models.IntegerField(default=0)
+    revenue_total = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    deductions_total = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    net_total = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    
+    expected_profit = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    actual_profit = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    difference = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    loss_amount = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    issues_count = models.IntegerField(default=0)
+    
+    report = models.JSONField(default=dict)
+    export_file = models.FileField(upload_to='audits/', null=True, blank=True)
+
+    def __str__(self):
+        return f"Audit {self.id} for {self.store_id}"
+
+class FinanceIssue(models.Model):
+    audit = models.ForeignKey(FinanceAudit, on_delete=models.CASCADE, related_name='issues')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, blank=True, related_name='finance_issues')
+    order_item = models.ForeignKey(OrderItem, on_delete=models.CASCADE, null=True, blank=True, related_name='finance_issues')
+    
+    issue_type = models.CharField(max_length=100)
+    severity = models.CharField(max_length=50) # info/warning/critical
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    
+    amount_impact = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    evidence = models.JSONField(default=dict)
+    
+    resolved = models.BooleanField(default=False)
+    resolved_note = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.issue_type} - {self.severity} ({self.amount_impact})"

@@ -108,6 +108,356 @@ paths:
               schema:
                 $ref: '#/components/schemas/Register'
           description: ''
+  /api/finance/audits/:
+    get:
+      operationId: finance_audits_list
+      tags:
+      - finance
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FinanceAudit'
+          description: ''
+    post:
+      operationId: finance_audits_create
+      tags:
+      - finance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinanceAudit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FinanceAudit'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FinanceAudit'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinanceAudit'
+          description: ''
+  /api/finance/audits/{id}/:
+    get:
+      operationId: finance_audits_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this finance audit.
+        required: true
+      tags:
+      - finance
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinanceAudit'
+          description: ''
+    put:
+      operationId: finance_audits_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this finance audit.
+        required: true
+      tags:
+      - finance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinanceAudit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FinanceAudit'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FinanceAudit'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinanceAudit'
+          description: ''
+    patch:
+      operationId: finance_audits_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this finance audit.
+        required: true
+      tags:
+      - finance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFinanceAudit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFinanceAudit'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFinanceAudit'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinanceAudit'
+          description: ''
+    delete:
+      operationId: finance_audits_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this finance audit.
+        required: true
+      tags:
+      - finance
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/finance/audits/{id}/export/:
+    post:
+      operationId: finance_audits_export_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this finance audit.
+        required: true
+      tags:
+      - finance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinanceAudit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FinanceAudit'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FinanceAudit'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinanceAudit'
+          description: ''
+  /api/finance/audits/{id}/orders/:
+    get:
+      operationId: finance_audits_orders_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this finance audit.
+        required: true
+      tags:
+      - finance
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinanceAudit'
+          description: ''
+  /api/finance/issues/:
+    get:
+      operationId: finance_issues_list
+      tags:
+      - finance
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FinanceIssue'
+          description: ''
+    post:
+      operationId: finance_issues_create
+      tags:
+      - finance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinanceIssue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FinanceIssue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FinanceIssue'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinanceIssue'
+          description: ''
+  /api/finance/issues/{id}/:
+    get:
+      operationId: finance_issues_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this finance issue.
+        required: true
+      tags:
+      - finance
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinanceIssue'
+          description: ''
+    put:
+      operationId: finance_issues_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this finance issue.
+        required: true
+      tags:
+      - finance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinanceIssue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FinanceIssue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FinanceIssue'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinanceIssue'
+          description: ''
+    patch:
+      operationId: finance_issues_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this finance issue.
+        required: true
+      tags:
+      - finance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFinanceIssue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFinanceIssue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFinanceIssue'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinanceIssue'
+          description: ''
+    delete:
+      operationId: finance_issues_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this finance issue.
+        required: true
+      tags:
+      - finance
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
   /api/onboarding/:
     get:
       operationId: onboarding_retrieve
@@ -730,6 +1080,126 @@ components:
           type: string
       required:
       - id
+    FinanceAudit:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/FinanceIssue'
+          readOnly: true
+        period_start:
+          type: string
+          format: date-time
+        period_end:
+          type: string
+          format: date-time
+        run_at:
+          type: string
+          format: date-time
+          readOnly: true
+        run_by:
+          type: string
+          maxLength: 255
+        status:
+          type: string
+          maxLength: 50
+        orders_examined:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        revenue_total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        deductions_total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        net_total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        expected_profit:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        actual_profit:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        difference:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        loss_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        issues_count:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        report: {}
+        export_file:
+          type: string
+          format: uri
+          nullable: true
+        store:
+          type: string
+          format: uuid
+      required:
+      - id
+      - issues
+      - period_end
+      - period_start
+      - run_at
+      - store
+    FinanceIssue:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        issue_type:
+          type: string
+          maxLength: 100
+        severity:
+          type: string
+          maxLength: 50
+        title:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        amount_impact:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        evidence: {}
+        resolved:
+          type: boolean
+        resolved_note:
+          type: string
+        audit:
+          type: integer
+        order:
+          type: integer
+          nullable: true
+        order_item:
+          type: integer
+          nullable: true
+      required:
+      - audit
+      - id
+      - issue_type
+      - severity
+      - title
     FinanceTransaction:
       type: object
       properties:
@@ -972,6 +1442,113 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OrderList'
+    PatchedFinanceAudit:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/FinanceIssue'
+          readOnly: true
+        period_start:
+          type: string
+          format: date-time
+        period_end:
+          type: string
+          format: date-time
+        run_at:
+          type: string
+          format: date-time
+          readOnly: true
+        run_by:
+          type: string
+          maxLength: 255
+        status:
+          type: string
+          maxLength: 50
+        orders_examined:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        revenue_total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        deductions_total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        net_total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        expected_profit:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        actual_profit:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        difference:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        loss_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        issues_count:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        report: {}
+        export_file:
+          type: string
+          format: uri
+          nullable: true
+        store:
+          type: string
+          format: uuid
+    PatchedFinanceIssue:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        issue_type:
+          type: string
+          maxLength: 100
+        severity:
+          type: string
+          maxLength: 50
+        title:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        amount_impact:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        evidence: {}
+        resolved:
+          type: boolean
+        resolved_note:
+          type: string
+        audit:
+          type: integer
+        order:
+          type: integer
+          nullable: true
+        order_item:
+          type: integer
+          nullable: true
     PatchedStoreRename:
       type: object
       properties:
