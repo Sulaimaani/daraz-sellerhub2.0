@@ -1,4 +1,4 @@
-# Daraz SellerHub - First Deploy Runbook
+﻿# Daraz SellerHub - First Deploy Runbook
 
 Follow these exact steps from top to bottom to deploy Daraz SellerHub safely to DigitalOcean App Platform for the very first time.
 
@@ -8,19 +8,19 @@ Follow these exact steps from top to bottom to deploy Daraz SellerHub safely to 
    - Go to DO Databases -> Create Database Cluster.
    - **Engine**: PostgreSQL 16
    - **Size**: Basic, $15/mo node (1GB RAM, 10GB Disk is sufficient for initial launch).
-   - **Region**: NYC3
+   - **Region**: sgp1
    - Save the Connection String (Public network for now if App Platform requires it, or VPC if configured).
 
 2. **Create Managed Redis**
    - Go to DO Databases -> Create Database Cluster.
    - **Engine**: Redis 7
    - **Size**: Basic, $15/mo node.
-   - **Region**: NYC3
+   - **Region**: sgp1
    - Save the Connection String (starts with `rediss://`).
 
 3. **Create Object Storage (Spaces)**
    - Go to DO Spaces -> Create Space.
-   - **Region**: NYC3
+   - **Region**: sgp1
    - **Name**: `daraz-saas-assets` (must be globally unique, adjust if needed).
    - **CDN**: Enable CDN (optional but recommended for static files).
    - Go to API -> Generate New Key. Save the **Access Key** and **Secret Key**.
@@ -65,8 +65,8 @@ DARAZ_REDIRECT_URI=https://<your_domain>/api/auth/daraz/callback
 SPACES_ACCESS_KEY_ID=<your_spaces_access_key>
 SPACES_SECRET_ACCESS_KEY=<your_spaces_secret_key>
 SPACES_BUCKET_NAME=<your_spaces_name>
-SPACES_ENDPOINT_URL=https://nyc3.digitaloceanspaces.com
-SPACES_REGION_NAME=nyc3
+SPACES_ENDPOINT_URL=https://sgp1.digitaloceanspaces.com
+SPACES_REGION_NAME=sgp1
 DARAZ_MOCK=true
 ```
 

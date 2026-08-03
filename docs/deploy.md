@@ -1,4 +1,4 @@
-# DigitalOcean App Platform Deployment Guide
+﻿# DigitalOcean App Platform Deployment Guide
 
 This guide walks you through deploying the SellerHub Daraz SaaS to DigitalOcean's App Platform, spinning up the Next.js frontend, Django backend, Celery workers, and attaching Managed Databases.
 
@@ -10,7 +10,7 @@ This guide walks you through deploying the SellerHub Daraz SaaS to DigitalOcean'
 ## 2. Infrastructure Setup
 1. **Managed Database**: Create a Managed PostgreSQL 16 cluster. Note the connection string (`DATABASE_URL`).
 2. **Managed Redis**: Create a Managed Redis 7 cluster. Note the connection string (`REDIS_URL`).
-3. **DO Spaces**: Create a Space (S3-compatible bucket) for static files and media. Generate an Access Key and Secret under API settings. Note the endpoint URL (e.g., `nyc3.digitaloceanspaces.com`).
+3. **DO Spaces**: Create a Space (S3-compatible bucket) for static files and media. Generate an Access Key and Secret under API settings. Note the endpoint URL (e.g., `sgp1.digitaloceanspaces.com`).
 
 ## 3. Daraz OAuth Configuration
 1. Note the production domain where this app will live.
@@ -40,8 +40,8 @@ You must set the following Secrets/Vars in the DO App Console before the first s
 | `SPACES_ACCESS_KEY_ID` | Spaces API Key | `DO...` |
 | `SPACES_SECRET_ACCESS_KEY` | Spaces Secret | `abc...` |
 | `SPACES_BUCKET_NAME` | Bucket name | `daraz-saas-media` |
-| `SPACES_ENDPOINT_URL` | Spaces Region URL | `https://nyc3.digitaloceanspaces.com` |
-| `SPACES_REGION_NAME` | Region | `nyc3` |
+| `SPACES_ENDPOINT_URL` | Spaces Region URL | `https://sgp1.digitaloceanspaces.com` |
+| `SPACES_REGION_NAME` | Region | `sgp1` |
 | `DATABASE_URL` | PG Connection | *Provided by DO Managed DB* |
 | `REDIS_URL` | Redis Connection | *Provided by DO Managed Redis* |
 

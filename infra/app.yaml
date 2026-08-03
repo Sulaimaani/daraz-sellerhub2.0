@@ -1,22 +1,22 @@
 name: daraz-saas
-region: nyc3
+region: sgp1
 
 databases:
-  - name: db
+  - name: daraz-db
     engine: PG
-    version: "16"
+    cluster_name: daraz-db
     production: true
 
-  - name: redis
+  - name: daraz-cache
     engine: REDIS
-    version: "7"
+    cluster_name: daraz-cache
     production: true
 
 services:
   - name: backend
     github:
       branch: main
-      repo: your-github-user/daraz-saas # UPDATE THIS
+      repo: Sulaimaani/daraz-sellerhub2.0
     source_dir: backend
     environment_slug: python
     instance_count: 1
@@ -25,10 +25,10 @@ services:
     envs:
       - key: DATABASE_URL
         scope: RUN_TIME
-        value: ${db.DATABASE_URL}
+        value: ${daraz-db.DATABASE_URL}
       - key: REDIS_URL
         scope: RUN_TIME
-        value: ${redis.REDIS_URL}
+        value: ${daraz-cache.REDIS_URL}
       - key: DJANGO_SETTINGS_MODULE
         scope: RUN_TIME
         value: config.settings.staging
@@ -41,9 +41,28 @@ services:
       - key: AUTH_COOKIE_DOMAIN
         scope: RUN_TIME
         value: ${APP_DOMAIN}
-      # The following must be set via DO App Console Secrets:
-      # SECRET_KEY, DARAZ_APP_KEY, DARAZ_APP_SECRET, DARAZ_REDIRECT_URI
-      # SPACES_ACCESS_KEY_ID, SPACES_SECRET_ACCESS_KEY, SPACES_BUCKET_NAME, SPACES_ENDPOINT_URL, SPACES_REGION_NAME
+      - key: SECRET_KEY
+        type: SECRET
+      - key: DARAZ_APP_KEY
+        type: SECRET
+      - key: DARAZ_APP_SECRET
+        type: SECRET
+      - key: DARAZ_REDIRECT_URI
+        type: SECRET
+      - key: FIELD_ENCRYPTION_KEY
+        type: SECRET
+      - key: SPACES_ACCESS_KEY_ID
+        type: SECRET
+      - key: SPACES_SECRET_ACCESS_KEY
+        type: SECRET
+      - key: SPACES_BUCKET_NAME
+        value: daraz-saas-assets
+      - key: SPACES_ENDPOINT_URL
+        value: https://sgp1.digitaloceanspaces.com
+      - key: SPACES_REGION_NAME
+        value: sgp1
+      - key: DARAZ_MOCK
+        value: "true"
     health_check:
       http_path: /healthz/
     http_port: 8080
@@ -53,7 +72,7 @@ services:
   - name: frontend
     github:
       branch: main
-      repo: your-github-user/daraz-saas # UPDATE THIS
+      repo: Sulaimaani/daraz-sellerhub2.0
     source_dir: frontend
     environment_slug: node-js
     instance_count: 1
@@ -72,7 +91,7 @@ workers:
   - name: worker
     github:
       branch: main
-      repo: your-github-user/daraz-saas # UPDATE THIS
+      repo: Sulaimaani/daraz-sellerhub2.0
     source_dir: backend
     environment_slug: python
     instance_count: 1
@@ -81,10 +100,10 @@ workers:
     envs:
       - key: DATABASE_URL
         scope: RUN_TIME
-        value: ${db.DATABASE_URL}
+        value: ${daraz-db.DATABASE_URL}
       - key: REDIS_URL
         scope: RUN_TIME
-        value: ${redis.REDIS_URL}
+        value: ${daraz-cache.REDIS_URL}
       - key: DJANGO_SETTINGS_MODULE
         scope: RUN_TIME
         value: config.settings.staging
@@ -92,7 +111,7 @@ workers:
   - name: beat
     github:
       branch: main
-      repo: your-github-user/daraz-saas # UPDATE THIS
+      repo: Sulaimaani/daraz-sellerhub2.0
     source_dir: backend
     environment_slug: python
     instance_count: 1
@@ -101,10 +120,10 @@ workers:
     envs:
       - key: DATABASE_URL
         scope: RUN_TIME
-        value: ${db.DATABASE_URL}
+        value: ${daraz-db.DATABASE_URL}
       - key: REDIS_URL
         scope: RUN_TIME
-        value: ${redis.REDIS_URL}
+        value: ${daraz-cache.REDIS_URL}
       - key: DJANGO_SETTINGS_MODULE
         scope: RUN_TIME
         value: config.settings.staging
@@ -113,7 +132,7 @@ jobs:
   - name: release
     github:
       branch: main
-      repo: your-github-user/daraz-saas # UPDATE THIS
+      repo: Sulaimaani/daraz-sellerhub2.0
     source_dir: backend
     environment_slug: python
     kind: PRE_INSTALL
@@ -121,8 +140,17 @@ jobs:
     envs:
       - key: DATABASE_URL
         scope: RUN_TIME
-        value: ${db.DATABASE_URL}
+        value: ${daraz-db.DATABASE_URL}
       - key: DJANGO_SETTINGS_MODULE
         scope: RUN_TIME
         value: config.settings.staging
-      # Note: Spaces env vars for collectstatic must be provided
+      - key: SPACES_ACCESS_KEY_ID
+        type: SECRET
+      - key: SPACES_SECRET_ACCESS_KEY
+        type: SECRET
+      - key: SPACES_BUCKET_NAME
+        value: daraz-saas-assets
+      - key: SPACES_ENDPOINT_URL
+        value: https://sgp1.digitaloceanspaces.com
+      - key: SPACES_REGION_NAME
+        value: sgp1
