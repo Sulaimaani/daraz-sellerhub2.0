@@ -428,6 +428,26 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/stores/{id}/data-quality/:
+    get:
+      operationId: stores_data_quality_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - stores
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: ''
   /api/stores/{id}/disconnect/:
     post:
       operationId: stores_disconnect_create

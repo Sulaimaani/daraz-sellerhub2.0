@@ -209,3 +209,35 @@ class StoreViewSet(viewsets.ModelViewSet):
             
         return Response(SyncJobSerializer(latest_job).data)
 
+    @action(detail=True, methods=["get"], url_path="data-quality")
+    def data_quality(self, request, pk=None):
+        store = self.get_object()
+        
+        # Check order items missing SKUs
+        from apps.orders.models import OrderItem, Order
+        from apps.products.models import Sku
+        from apps.returns.models import ReturnPackage
+        
+        items_missing_sku = OrderItem.objects.filter(store=store, sku__isnull=True).count()
+        
+        # Check SKUs missing costs
+        skus_missing_cost = Sku.objects.filter(store=store, costs__isnull=True).count()
+        
+        # Check returns missing order
+        returns_missing_order = ReturnPackage.objects.filter(store=store, order__isnull=True).count()
+        
+        # Unmapped statuses
+        unmapped_statuses = OrderItem.objects.filter(store=store, status='Unknown').count()
+        
+        # Orders missing finance (a bit complex, let's just say delivered orders without finance transactions)
+        # For simplicity in this endpoint, we'll check orders with no finance_transactions at all, but only if they are Delivered
+        orders_missing_finance = Order.objects.filter(store=store, status='Delivered', finance_transactions__isnull=True).count()
+        
+        return Response({
+            "items_missing_sku": items_missing_sku,
+            "skus_missing_cost": skus_missing_cost,
+            "returns_missing_order": returns_missing_order,
+            "unmapped_statuses": unmapped_statuses,
+            "orders_missing_finance": orders_missing_finance,
+        })
+
