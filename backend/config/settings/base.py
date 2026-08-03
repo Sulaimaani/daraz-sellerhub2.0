@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "apps.returns",
     "apps.labels",
     "apps.notifications",
+    "apps.billing",
 ]
 
 AUTH_USER_MODEL = "accounts.User"

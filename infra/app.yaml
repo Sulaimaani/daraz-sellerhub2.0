@@ -75,7 +75,7 @@ workers:
     source_dir: backend
     environment_slug: python
     instance_count: 1
-    instance_size_slug: basic-xs
+    instance_size_slug: basic-s
     run_command: celery -A config worker -l INFO
     envs:
       - key: DATABASE_URL

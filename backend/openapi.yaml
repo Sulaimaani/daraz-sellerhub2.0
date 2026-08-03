@@ -605,6 +605,474 @@ paths:
               schema:
                 $ref: '#/components/schemas/OrderList'
           description: ''
+  /api/products/costs/:
+    get:
+      operationId: products_costs_list
+      tags:
+      - products
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SkuCost'
+          description: ''
+    post:
+      operationId: products_costs_create
+      tags:
+      - products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SkuCost'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SkuCost'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SkuCost'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkuCost'
+          description: ''
+  /api/products/costs/{id}/:
+    get:
+      operationId: products_costs_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sku cost.
+        required: true
+      tags:
+      - products
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkuCost'
+          description: ''
+    put:
+      operationId: products_costs_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sku cost.
+        required: true
+      tags:
+      - products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SkuCost'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SkuCost'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SkuCost'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkuCost'
+          description: ''
+    patch:
+      operationId: products_costs_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sku cost.
+        required: true
+      tags:
+      - products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSkuCost'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSkuCost'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSkuCost'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkuCost'
+          description: ''
+    delete:
+      operationId: products_costs_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sku cost.
+        required: true
+      tags:
+      - products
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/products/costs/bulk_import/:
+    post:
+      operationId: products_costs_bulk_import_create
+      tags:
+      - products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SkuCost'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SkuCost'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SkuCost'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkuCost'
+          description: ''
+  /api/products/products/:
+    get:
+      operationId: products_products_list
+      tags:
+      - products
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+          description: ''
+    post:
+      operationId: products_products_create
+      tags:
+      - products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Product'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+  /api/products/products/{id}/:
+    get:
+      operationId: products_products_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this product.
+        required: true
+      tags:
+      - products
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+    put:
+      operationId: products_products_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this product.
+        required: true
+      tags:
+      - products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Product'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+    patch:
+      operationId: products_products_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this product.
+        required: true
+      tags:
+      - products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProduct'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProduct'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProduct'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+    delete:
+      operationId: products_products_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this product.
+        required: true
+      tags:
+      - products
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/products/skus/:
+    get:
+      operationId: products_skus_list
+      tags:
+      - products
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sku'
+          description: ''
+    post:
+      operationId: products_skus_create
+      tags:
+      - products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sku'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Sku'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Sku'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sku'
+          description: ''
+  /api/products/skus/{id}/:
+    get:
+      operationId: products_skus_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sku.
+        required: true
+      tags:
+      - products
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sku'
+          description: ''
+    put:
+      operationId: products_skus_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sku.
+        required: true
+      tags:
+      - products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sku'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Sku'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Sku'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sku'
+          description: ''
+    patch:
+      operationId: products_skus_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sku.
+        required: true
+      tags:
+      - products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSku'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSku'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSku'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sku'
+          description: ''
+    delete:
+      operationId: products_skus_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sku.
+        required: true
+      tags:
+      - products
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
   /api/returns/claims/:
     get:
       operationId: returns_claims_list
@@ -2075,6 +2543,58 @@ components:
         item:
           type: integer
           nullable: true
+    PatchedProduct:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        skus:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sku'
+          readOnly: true
+        daraz_item_id:
+          type: string
+          maxLength: 255
+        name:
+          type: string
+          maxLength: 500
+        primary_category:
+          type: string
+          maxLength: 255
+        brand:
+          type: string
+          maxLength: 255
+        status:
+          type: string
+          maxLength: 50
+        main_image_url:
+          oneOf:
+          - type: string
+            format: uri
+            maxLength: 1000
+          - type: string
+            maxLength: 0
+        url:
+          oneOf:
+          - type: string
+            format: uri
+            maxLength: 1000
+          - type: string
+            maxLength: 0
+        raw_json: {}
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        store:
+          type: string
+          format: uuid
     PatchedReturnClaim:
       type: object
       properties:
@@ -2220,12 +2740,179 @@ components:
         order:
           type: integer
           nullable: true
+    PatchedSku:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        costs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SkuCost'
+          readOnly: true
+        daraz_sku_id:
+          type: string
+          maxLength: 255
+        seller_sku:
+          type: string
+          maxLength: 255
+        shop_sku:
+          type: string
+          maxLength: 255
+        name:
+          type: string
+          maxLength: 500
+        variation: {}
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+        special_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+        quantity:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        image_url:
+          oneOf:
+          - type: string
+            format: uri
+            maxLength: 1000
+          - type: string
+            maxLength: 0
+        package_weight:
+          type: string
+          maxLength: 50
+        package_length:
+          type: string
+          maxLength: 50
+        package_width:
+          type: string
+          maxLength: 50
+        package_height:
+          type: string
+          maxLength: 50
+        raw_json: {}
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        product:
+          type: integer
+        store:
+          type: string
+          format: uuid
+    PatchedSkuCost:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        cost_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        packaging_cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        other_cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        effective_from:
+          type: string
+          format: date-time
+        note:
+          type: string
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        sku:
+          type: integer
     PatchedStoreRename:
       type: object
       properties:
         name:
           type: string
           maxLength: 255
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        skus:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sku'
+          readOnly: true
+        daraz_item_id:
+          type: string
+          maxLength: 255
+        name:
+          type: string
+          maxLength: 500
+        primary_category:
+          type: string
+          maxLength: 255
+        brand:
+          type: string
+          maxLength: 255
+        status:
+          type: string
+          maxLength: 50
+        main_image_url:
+          oneOf:
+          - type: string
+            format: uri
+            maxLength: 1000
+          - type: string
+            maxLength: 0
+        url:
+          oneOf:
+          - type: string
+            format: uri
+            maxLength: 1000
+          - type: string
+            maxLength: 0
+        raw_json: {}
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        store:
+          type: string
+          format: uuid
+      required:
+      - created_at
+      - daraz_item_id
+      - id
+      - name
+      - skus
+      - store
+      - updated_at
     Register:
       type: object
       properties:
@@ -2477,6 +3164,137 @@ components:
       - return_order_id
       - store
       - updated_at
+    Sku:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        costs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SkuCost'
+          readOnly: true
+        daraz_sku_id:
+          type: string
+          maxLength: 255
+        seller_sku:
+          type: string
+          maxLength: 255
+        shop_sku:
+          type: string
+          maxLength: 255
+        name:
+          type: string
+          maxLength: 500
+        variation: {}
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+        special_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+          nullable: true
+        quantity:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        image_url:
+          oneOf:
+          - type: string
+            format: uri
+            maxLength: 1000
+          - type: string
+            maxLength: 0
+        package_weight:
+          type: string
+          maxLength: 50
+        package_length:
+          type: string
+          maxLength: 50
+        package_width:
+          type: string
+          maxLength: 50
+        package_height:
+          type: string
+          maxLength: 50
+        raw_json: {}
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        product:
+          type: integer
+        store:
+          type: string
+          format: uuid
+      required:
+      - costs
+      - created_at
+      - id
+      - product
+      - seller_sku
+      - store
+      - updated_at
+    SkuCost:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        cost_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        packaging_cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        other_cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        effective_from:
+          type: string
+          format: date-time
+        note:
+          type: string
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        sku:
+          type: integer
+      required:
+      - created_at
+      - effective_from
+      - id
+      - sku
+      - updated_at
+    SourceEnum:
+      enum:
+      - manual
+      - csv
+      - api
+      type: string
+      description: |-
+        * `manual` - Manual
+        * `csv` - CSV Import
+        * `api` - API
     StatusEnum:
       enum:
       - connected

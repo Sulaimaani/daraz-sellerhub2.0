@@ -19,18 +19,17 @@ from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
-from django.http import HttpResponse
-
-def healthz(request):
-    return HttpResponse("OK")
+from apps.core.health import healthz, readyz
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
     path("healthz/", healthz, name="healthz"),
+    path("readyz/", readyz, name="readyz"),
+    path("admin/", admin.site.urls),
     path("api/auth/", include("apps.accounts.urls")),
     path("api/stores/", include("apps.stores.urls")),
     path("api/onboarding/", include("apps.onboarding.urls")),
     path("api/orders/", include("apps.orders.urls")),
+    path("api/products/", include("apps.products.urls")),
     path("api/finance/", include("apps.finance.urls")),
     path("api/returns/", include("apps.returns.urls")),
     # OpenAPI Schema
