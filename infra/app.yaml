@@ -135,7 +135,7 @@ jobs:
       repo: Sulaimaani/daraz-sellerhub2.0
     source_dir: backend
     environment_slug: python
-    kind: PRE_INSTALL
+    kind: PRE_DEPLOY
     run_command: python manage.py migrate && python manage.py collectstatic --noinput
     envs:
       - key: DATABASE_URL
