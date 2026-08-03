@@ -605,6 +605,447 @@ paths:
               schema:
                 $ref: '#/components/schemas/OrderList'
           description: ''
+  /api/returns/claims/:
+    get:
+      operationId: returns_claims_list
+      tags:
+      - returns
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReturnClaim'
+          description: ''
+    post:
+      operationId: returns_claims_create
+      tags:
+      - returns
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnClaim'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReturnClaim'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReturnClaim'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnClaim'
+          description: ''
+  /api/returns/claims/{id}/:
+    get:
+      operationId: returns_claims_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this return claim.
+        required: true
+      tags:
+      - returns
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnClaim'
+          description: ''
+    put:
+      operationId: returns_claims_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this return claim.
+        required: true
+      tags:
+      - returns
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnClaim'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReturnClaim'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReturnClaim'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnClaim'
+          description: ''
+    patch:
+      operationId: returns_claims_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this return claim.
+        required: true
+      tags:
+      - returns
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedReturnClaim'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedReturnClaim'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedReturnClaim'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnClaim'
+          description: ''
+    delete:
+      operationId: returns_claims_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this return claim.
+        required: true
+      tags:
+      - returns
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/returns/inspections/:
+    get:
+      operationId: returns_inspections_list
+      tags:
+      - returns
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PackageInspection'
+          description: ''
+    post:
+      operationId: returns_inspections_create
+      tags:
+      - returns
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PackageInspection'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PackageInspection'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PackageInspection'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageInspection'
+          description: ''
+  /api/returns/inspections/{id}/:
+    get:
+      operationId: returns_inspections_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this package inspection.
+        required: true
+      tags:
+      - returns
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageInspection'
+          description: ''
+    put:
+      operationId: returns_inspections_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this package inspection.
+        required: true
+      tags:
+      - returns
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PackageInspection'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PackageInspection'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PackageInspection'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageInspection'
+          description: ''
+    patch:
+      operationId: returns_inspections_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this package inspection.
+        required: true
+      tags:
+      - returns
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPackageInspection'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPackageInspection'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPackageInspection'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageInspection'
+          description: ''
+    delete:
+      operationId: returns_inspections_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this package inspection.
+        required: true
+      tags:
+      - returns
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/returns/packages/:
+    get:
+      operationId: returns_packages_list
+      tags:
+      - returns
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReturnPackage'
+          description: ''
+    post:
+      operationId: returns_packages_create
+      tags:
+      - returns
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnPackage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReturnPackage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReturnPackage'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnPackage'
+          description: ''
+  /api/returns/packages/{id}/:
+    get:
+      operationId: returns_packages_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this return package.
+        required: true
+      tags:
+      - returns
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnPackage'
+          description: ''
+    put:
+      operationId: returns_packages_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this return package.
+        required: true
+      tags:
+      - returns
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnPackage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReturnPackage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReturnPackage'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnPackage'
+          description: ''
+    patch:
+      operationId: returns_packages_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this return package.
+        required: true
+      tags:
+      - returns
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedReturnPackage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedReturnPackage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedReturnPackage'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnPackage'
+          description: ''
+    delete:
+      operationId: returns_packages_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this return package.
+        required: true
+      tags:
+      - returns
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
   /api/schema/:
     get:
       operationId: schema_retrieve
@@ -1061,6 +1502,38 @@ paths:
           description: ''
 components:
   schemas:
+    ClaimEvidence:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        kind:
+          type: string
+          maxLength: 50
+        file:
+          type: string
+          format: uri
+        caption:
+          type: string
+          maxLength: 500
+        uploaded_at:
+          type: string
+          format: date-time
+          readOnly: true
+        checksum:
+          type: string
+          maxLength: 64
+        exif_stripped:
+          type: boolean
+        claim:
+          type: integer
+      required:
+      - claim
+      - file
+      - id
+      - kind
+      - uploaded_at
     Customer:
       type: object
       properties:
@@ -1423,6 +1896,35 @@ components:
       - masked_phone
       - order_number
       - status
+    PackageInspection:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        condition:
+          type: string
+          maxLength: 100
+        recorded_by:
+          type: string
+          maxLength: 255
+        recorded_at:
+          type: string
+          format: date-time
+          readOnly: true
+        note:
+          type: string
+        photos: {}
+        return_package:
+          type: integer
+        item:
+          type: integer
+          nullable: true
+      required:
+      - condition
+      - id
+      - recorded_at
+      - return_package
     PaginatedOrderListList:
       type: object
       required:
@@ -1549,6 +2051,175 @@ components:
         order_item:
           type: integer
           nullable: true
+    PatchedPackageInspection:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        condition:
+          type: string
+          maxLength: 100
+        recorded_by:
+          type: string
+          maxLength: 255
+        recorded_at:
+          type: string
+          format: date-time
+          readOnly: true
+        note:
+          type: string
+        photos: {}
+        return_package:
+          type: integer
+        item:
+          type: integer
+          nullable: true
+    PatchedReturnClaim:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        evidence:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClaimEvidence'
+          readOnly: true
+        claim_type:
+          type: string
+          maxLength: 100
+        condition_recorded:
+          type: string
+          maxLength: 100
+        status:
+          type: string
+          maxLength: 50
+        filed_at:
+          type: string
+          format: date-time
+          nullable: true
+        is_late_filing:
+          type: boolean
+        expected_refund:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        claimed_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        approved_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        daraz_claim_ref:
+          type: string
+          maxLength: 255
+        rejection_reason:
+          type: string
+        notes:
+          type: string
+        deadline_at:
+          type: string
+          format: date-time
+          nullable: true
+        deadline_source_field:
+          type: string
+          maxLength: 100
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        return_package:
+          type: integer
+        store:
+          type: string
+          format: uuid
+    PatchedReturnPackage:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReturnItem'
+          readOnly: true
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReturnClaim'
+          readOnly: true
+        queue:
+          type: string
+          readOnly: true
+        deadline:
+          type: string
+          readOnly: true
+        return_order_id:
+          type: string
+          maxLength: 255
+        tracking_code:
+          type: string
+          maxLength: 255
+        package_type:
+          type: string
+          maxLength: 100
+        lifecycle_status:
+          type: string
+          maxLength: 100
+        daraz_status:
+          type: string
+          maxLength: 100
+        daraz_status_updated_at:
+          type: string
+          format: date-time
+          nullable: true
+        returned_at:
+          type: string
+          format: date-time
+          nullable: true
+        received_at:
+          type: string
+          format: date-time
+          nullable: true
+        reason:
+          type: string
+          maxLength: 255
+        buyer_reason:
+          type: string
+          maxLength: 255
+        item_value_total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        refund_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        is_full_package_return:
+          type: boolean
+        raw_json: {}
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        store:
+          type: string
+          format: uuid
+        order:
+          type: integer
+          nullable: true
     PatchedStoreRename:
       type: object
       properties:
@@ -1574,6 +2245,238 @@ components:
       required:
       - email
       - password
+    ReturnClaim:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        evidence:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClaimEvidence'
+          readOnly: true
+        claim_type:
+          type: string
+          maxLength: 100
+        condition_recorded:
+          type: string
+          maxLength: 100
+        status:
+          type: string
+          maxLength: 50
+        filed_at:
+          type: string
+          format: date-time
+          nullable: true
+        is_late_filing:
+          type: boolean
+        expected_refund:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        claimed_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        approved_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        daraz_claim_ref:
+          type: string
+          maxLength: 255
+        rejection_reason:
+          type: string
+        notes:
+          type: string
+        deadline_at:
+          type: string
+          format: date-time
+          nullable: true
+        deadline_source_field:
+          type: string
+          maxLength: 100
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        return_package:
+          type: integer
+        store:
+          type: string
+          format: uuid
+      required:
+      - claim_type
+      - created_at
+      - evidence
+      - id
+      - return_package
+      - store
+      - updated_at
+    ReturnItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        inspections:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageInspection'
+          readOnly: true
+        daraz_item_id:
+          type: string
+          maxLength: 255
+        sku_string:
+          type: string
+          maxLength: 255
+        name:
+          type: string
+          maxLength: 500
+        quantity_returned:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        quantity_ordered:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        item_value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        condition_recorded:
+          type: string
+          nullable: true
+          maxLength: 255
+        image_url:
+          oneOf:
+          - type: string
+            format: uri
+            maxLength: 1000
+          - type: string
+            maxLength: 0
+        raw_json: {}
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        return_package:
+          type: integer
+        store:
+          type: string
+          format: uuid
+        order_item:
+          type: integer
+          nullable: true
+      required:
+      - created_at
+      - id
+      - inspections
+      - return_package
+      - store
+      - updated_at
+    ReturnPackage:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReturnItem'
+          readOnly: true
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReturnClaim'
+          readOnly: true
+        queue:
+          type: string
+          readOnly: true
+        deadline:
+          type: string
+          readOnly: true
+        return_order_id:
+          type: string
+          maxLength: 255
+        tracking_code:
+          type: string
+          maxLength: 255
+        package_type:
+          type: string
+          maxLength: 100
+        lifecycle_status:
+          type: string
+          maxLength: 100
+        daraz_status:
+          type: string
+          maxLength: 100
+        daraz_status_updated_at:
+          type: string
+          format: date-time
+          nullable: true
+        returned_at:
+          type: string
+          format: date-time
+          nullable: true
+        received_at:
+          type: string
+          format: date-time
+          nullable: true
+        reason:
+          type: string
+          maxLength: 255
+        buyer_reason:
+          type: string
+          maxLength: 255
+        item_value_total:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        refund_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
+        is_full_package_return:
+          type: boolean
+        raw_json: {}
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        store:
+          type: string
+          format: uuid
+        order:
+          type: integer
+          nullable: true
+      required:
+      - claims
+      - created_at
+      - deadline
+      - id
+      - items
+      - queue
+      - return_order_id
+      - store
+      - updated_at
     StatusEnum:
       enum:
       - connected
