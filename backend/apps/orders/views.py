@@ -158,7 +158,10 @@ class OrderViewSet(viewsets.ReadOnlyModelViewSet):
         store_id = request.data.get('store_id') or request.query_params.get('store_id')
         if not store_id:
             # Can export across all stores, but let's grab the first one for the task
-            store_id = Store.objects.filter(owner=request.user).first().id
+            store = Store.objects.filter(owner=request.user).first()
+            if not store:
+                return Response({"error": "No stores connected."}, status=status.HTTP_400_BAD_REQUEST)
+            store_id = store.id
             
         export_orders_csv.delay(store_id, request.query_params.dict(), request.user.email)
         return Response({"status": "queued", "message": "You will receive an email when the export is ready."})

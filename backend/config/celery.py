@@ -19,6 +19,26 @@ app.conf.beat_schedule = {
         "task": "apps.stores.tasks.purge_api_call_logs",
         "schedule": crontab(hour=2, minute=0),
     },
+    "purge-old-data-daily": {
+        "task": "apps.core.tasks.purge_old_data",
+        "schedule": crontab(hour=3, minute=0),
+    },
+    "sync-recent-orders-half-hourly": {
+        "task": "apps.stores.tasks.sync_recent_orders",
+        "schedule": crontab(minute='*/30'),
+    },
+    "sync-finance-daily": {
+        "task": "apps.stores.tasks.sync_finance",
+        "schedule": crontab(hour=4, minute=0),
+    },
+    "sync-returns-daily": {
+        "task": "apps.stores.tasks.sync_returns",
+        "schedule": crontab(hour=5, minute=0),
+    },
+    "sync-products-daily": {
+        "task": "apps.stores.tasks.sync_products",
+        "schedule": crontab(hour=6, minute=0),
+    },
 }
 
 @app.task(bind=True)
